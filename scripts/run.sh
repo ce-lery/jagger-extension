@@ -11,9 +11,6 @@ cd build
 cmake ..
 make all
 
+./JaggerExtension
+# valgrind -s  --leak-check=full ./JaggerExtension
 
-
-# g++ -O2 -g main.cpp
-# valgrind -s  --leak-check=full
-# ./a.out
-# ./a.out

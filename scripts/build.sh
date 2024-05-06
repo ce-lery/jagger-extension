@@ -20,7 +20,7 @@ wget "http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/jagger/mecab-jumandic-7.0-20130310
 patch -p0 < mecab-jumandic-7.0-20130310.patch 
 
 # 2) Use the Kyoto University Web Document Leads Corpus (default)
-git clone https://github.com/ku-nlp/KWDLC
+git clone https://github.com/ku-nlp/KWDLC -b v1.1.1
 ./configure
 
 # 3) Train a model from the standard split, evaluate the resulting model, and then install
@@ -29,10 +29,10 @@ make model-benchmark && make install
 # 4) cp jagger-extension
 cd ../
 rm jagger-2023-02-18/src/jagger.cc
+rm jagger-2023-02-18/src/jagger.h
 rm jagger-2023-02-18/src/ccedar_core.h
 
-cp jagger-extension/jagger.cc jagger-2023-02-18/src/
-cp jagger-extension/ccedar_core.h jagger-2023-02-18/src/
+cp -r jagger-extension/* jagger-2023-02-18/src/
 
 # 5) remove unneccesary file
 rm jagger-2023-02-18.tar.gz

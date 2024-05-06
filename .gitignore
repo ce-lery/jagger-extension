@@ -1,0 +1,11 @@
+# other
+log
+logs
+__pycache__
+.vscode 
+
+# build
+build/*
+
+# externals
+jagger-2023-02-18/*
