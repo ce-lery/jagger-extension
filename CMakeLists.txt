@@ -4,7 +4,7 @@ project(JaggerExtension CXX)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/jagger-2023-02-18/src) 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/jagger-2023-02-18) 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/jagger-2023-02-18/model/kwdlc)
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/jagger-2023-02-18/model/kwdlc)
 
 
 file(GLOB files ${CMAKE_CURRENT_SOURCE_DIR}/jagger-2023-02-18/model/kwdlc/patterns)    

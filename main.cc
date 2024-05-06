@@ -25,7 +25,6 @@ int main(void)
     };
 
     chrono::system_clock::time_point start, end;
-    uint32_t elapsed_time=0;
     start = chrono::system_clock::now();
 
     for(auto sentence:sentences){

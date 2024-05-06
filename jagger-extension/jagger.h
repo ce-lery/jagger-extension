@@ -25,10 +25,6 @@
 // #endif
 
 static const size_t BUF_SIZE = 1 << 18;
-static const size_t CP_MAX   = 0x10ffff;
-static const size_t MAX_PLEN = 1 << 6;
-
-static const char* FEAT_UNK = "\x09\xE5\x90\x8D\xE8\xA9\x9E\x2C\xE6\x99\xAE\xE9\x80\x9A\xE5\x90\x8D\xE8\xA9\x9E\x2C\x2A\x2C\x2A";
 
 // compute length of UTF8 character *p
 static inline int u8_len (const char *p) {
@@ -66,12 +62,6 @@ static inline int unicode (const char* p, int& b) {
     default: errx (1, "UTF-8 decode error: %s", p);
   }
   return 0;
-}
-
-static const char* skip_to (const char* p, const size_t n, const char c) {
-  for (size_t i = 0; i < n; ++i, ++p)
-    while (*p != c && *p != '\n') ++p;
-  return p;
 }
 
 class sbag_t {

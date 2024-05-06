@@ -8,6 +8,16 @@
 // Copyright (c) 2022 Naoki Yoshinaga <ynaga@iis.u-tokyo.ac.jp>
 // #include <jagger.h>
 
+static const size_t CP_MAX   = 0x10ffff;
+static const size_t MAX_PLEN = 1 << 6;
+
+static const char* FEAT_UNK = "\x09\xE5\x90\x8D\xE8\xA9\x9E\x2C\xE6\x99\xAE\xE9\x80\x9A\xE5\x90\x8D\xE8\xA9\x9E\x2C\x2A\x2C\x2A";
+
+static const char* skip_to (const char* p, const size_t n, const char c) {
+  for (size_t i = 0; i < n; ++i, ++p)
+    while (*p != c && *p != '\n') ++p;
+  return p;
+}
 
 Jagger::Jagger () : da (), c2i (0), p2f (0), fs (0), mmaped () {}
 
@@ -50,7 +60,7 @@ void Jagger::read_model (const std::string& m) { // read patterns to memory
     p2f_.push_back ((1ul << 32) | 2);
     // count each character to obtain dense mapping
     std::vector <std::pair <size_t, int> > counter (CP_MAX + 3);
-    for (int u = 0; u < counter.size (); ++u) // allow 43 bits for counting
+    for (int u = 0; u < (int)counter.size (); ++u) // allow 43 bits for counting
       counter[u] = std::make_pair (0, u);
     std::vector <std::pair <std::string, uint64_t > > keys;
     char *line = 0;
@@ -110,7 +120,7 @@ void Jagger::read_model (const std::string& m) { // read patterns to memory
     // save pattern trie
     for (std::vector <std::pair <std::string, uint64_t> >::const_iterator it = keys.begin (); it != keys.end (); ++it) {
       std::vector <int> key;
-      for (int offset (0), b (0); offset < it->first.size (); offset += b)
+      for (int offset (0), b (0); offset < (int)it->first.size (); offset += b)
         key.push_back (c2i_[unicode (&it->first[offset], b)]);
       if (it->second & 0xfff)
         key.push_back (c2i_[(it->second & 0xfff) + CP_MAX]);
